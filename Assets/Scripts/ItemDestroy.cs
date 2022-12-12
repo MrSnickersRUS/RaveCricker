@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemDestroy : MonoBehaviour
@@ -29,6 +28,7 @@ public class ItemDestroy : MonoBehaviour
             currentTime += Time.deltaTime;
             if ((int) currentTime == itemBreakTime) {
                 print("broken");
+                Destroy(gameObject);
             }
             yield return new WaitForFixedUpdate();
         }

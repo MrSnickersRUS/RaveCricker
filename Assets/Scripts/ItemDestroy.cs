@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Random;
+using UnityEngine.UI;
 
 public class ItemDestroy : MonoBehaviour
 {
@@ -9,12 +9,9 @@ public class ItemDestroy : MonoBehaviour
 
     private bool isHeld;
 
-    private Random randomNum;
-    [SerializeField] private Random randomChance;
-
     private int dirtNum;
 
-    private int GravelNum;
+    private int gravelNum;
 
     private void Start()
     {
@@ -38,8 +35,8 @@ public class ItemDestroy : MonoBehaviour
             if ((int) currentTime == itemBreakTime) {
                 print("broken");
                 Destroy(gameObject);
-                DirtGiver;
-                GravelGiver;
+                DirtGiver();
+                GravelGiver();
             }
             yield return new WaitForFixedUpdate();
         }
@@ -47,23 +44,23 @@ public class ItemDestroy : MonoBehaviour
 
     void DirtGiver()
     {
-        int dirtGiver = new Random randomNum.Next(1, 5)
+        int dirtGiver = Random.Range(1, 5);
         dirtNum += dirtGiver;
         PlayerPrefs.SetInt("Dirt number", dirtNum);
 
-        print("получено земля");
+        print("сейчас у вас земля" + dirtNum);
     }
 
     void GravelGiver()
     {
-        int DropChance = new Random randomChance.Next(1, 100);
-        if (DropChance > 40)
+        int DropChance = Random.Range(1, 100);
+        if (DropChance >= 40)
         {
-            int GravelGiver = new Random randomNum.Next(0, 1);
-            GravelNum += GravelGiver;
+            int gravelGiver = 1;
+            gravelNum += gravelGiver;
             PlayerPrefs.SetInt("Gravel number", gravelNum);
 
-            print("получено гравий");
+            print("сейчас у вас гравий:" + gravelNum);
         }
     }
 }
